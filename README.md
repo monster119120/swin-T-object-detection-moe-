@@ -168,4 +168,4 @@ contains the modified configuration for the backbone network.
 
 As the output of Swin-T MoE is different from Swin-T, I modified the `extract_feat` function in `.\mmdet\models\detectors\two_stage.py`.
 
-# you can change the config according to your needs
+you can change the config according to your needs
