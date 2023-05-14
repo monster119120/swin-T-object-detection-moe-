@@ -140,5 +140,5 @@ optimizer_config = dict(
     grad_clip=None,
     coalesce=True,
     bucket_size_mb=-1,
-    use_fp16=True,
+    use_fp16=False,
 )
