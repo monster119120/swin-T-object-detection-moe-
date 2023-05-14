@@ -1,5 +1,4 @@
 ## swin-T moe 
-I added Swin Transformer MoE (referred to as Swin-T MoE hereafter) to the backbone network. MoE is a method that expands the model parameters and improves the model performance. The implementation of Swin Transformer MoE used Microsoft's Tutel framework.
 
 ### Installation
 
