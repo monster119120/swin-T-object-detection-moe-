@@ -4,6 +4,7 @@ I added Swin Transformer MoE (referred to as Swin-T MoE hereafter) to the backbo
 ### Installation
 
 ```
+#!/bin/sh
 
 conda create -n swin python==3.8
 conda activate swin
