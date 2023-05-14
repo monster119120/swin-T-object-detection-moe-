@@ -15,5 +15,5 @@ from .swin_transformer_moe import SwinTransformerMoE
 __all__ = [
     'RegNet', 'ResNet', 'ResNetV1d', 'ResNeXt', 'SSDVGG', 'HRNet', 'Res2Net',
     'HourglassNet', 'DetectoRS_ResNet', 'DetectoRS_ResNeXt', 'Darknet',
-    'ResNeSt', 'TridentResNet', 'SwinTransformer'
+    'ResNeSt', 'TridentResNet', 'SwinTransformer', 'SwinTransformerMoE',
 ]
