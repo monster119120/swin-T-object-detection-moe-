@@ -1,3 +1,5 @@
+#!/bin/sh
+
 conda create -n swin python==3.8
 conda activate swin
 
