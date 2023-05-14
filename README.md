@@ -37,10 +37,18 @@ I provided the relevant configuration files for reference:
 ```
 contains the modified configuration for the backbone network.
 
-### Run
+### Train
+```
+OMP_NUM_THREADS=4 CUDA_VISIBLE_DEVICES=4,5 PORT=13366 bash tools/dist_train.sh configs/swin/cascade_mask_rcnn_swin_moe_tiny_patch4_window7_mstrain_480-800_giou_4conv1f_adamw_3x_coco.py 2
 
-### Others
 
-As the output of Swin-T MoE is different from Swin-T, I modified the `extract_feat` function in `.\mmdet\models\detectors\two_stage.py`.
+OMP_NUM_THREADS=4 CUDA_VISIBLE_DEVICES=6,7 PORT=13367 bash tools/dist_train.sh configs/swin/cascade_mask_rcnn_swin_tiny_patch4_window7_mstrain_480-800_giou_4conv1f_adamw_3x_coco.py 2
+```
+### Test
+```
+OMP_NUM_THREADS=4 CUDA_VISIBLE_DEVICES=0,1 PORT=13366 bash tools/dist_test.sh configs/swin/cascade_mask_rcnn_swin_moe_tiny_patch4_window7_mstrain_480-800_giou_4conv1f_adamw_3x_coco.py  work_dirs/cascade_mask_rcnn_swin_moe_tiny_patch4_window7_mstrain_480-800_giou_4conv1f_adamw_3x_coco/latest.pth 2 --eval bbox
 
-you can change the config according to your needs
+
+OMP_NUM_THREADS=4 CUDA_VISIBLE_DEVICES=0,1 PORT=13367 bash tools/dist_test.sh configs/swin/cascade_mask_rcnn_swin_tiny_patch4_window7_mstrain_480-800_giou_4conv1f_adamw_3x_coco.py work_dirs/cascade_mask_rcnn_swin_tiny_patch4_window7_mstrain_480-800_giou_4conv1f_adamw_3x_coco/latest.pth 2 --eval bbox
+```
+
