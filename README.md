@@ -24,6 +24,8 @@ pip install pycocotools
 pip uninstall pycocotools
 pip install mmpycocotools
 
+pip install numpy==1.23.5
+
 ```
 
 You can check out Swin-T MoE at .
