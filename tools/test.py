@@ -196,6 +196,12 @@ def main():
         outputs = multi_gpu_test(model, data_loader, args.tmpdir,
                                  args.gpu_collect)
 
+    # import pickle
+    # F=open('res.pkl','rb')
+    # outputs = pickle.load(F)
+    # F.close()
+
+
     rank, _ = get_dist_info()
     if rank == 0:
         if args.out:
@@ -214,7 +220,8 @@ def main():
                 eval_kwargs.pop(key, None)
             eval_kwargs.update(dict(metric=args.eval, **kwargs))
             print(dataset.evaluate(outputs, **eval_kwargs))
-
+            # annotations = [dataset.get_ann_info(i) for i in range(len(dataset))]
+            # mmcv.dump(annotations, 'anno.pkl')
 
 if __name__ == '__main__':
     main()

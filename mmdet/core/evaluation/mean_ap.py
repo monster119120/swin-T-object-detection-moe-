@@ -172,11 +172,22 @@ def tpfp_default(det_bboxes,
             each array is (num_scales, m).
     """
     # an indicator of ignored gts
+    if type(det_bboxes) is list:
+        det_bboxes = np.vstack(det_bboxes)
+    if type(gt_bboxes) is list:
+        gt_bboxes = np.vstack(gt_bboxes)
+    if type(gt_bboxes_ignore) is list:
+        gt_bboxes_ignore = np.vstack(gt_bboxes_ignore)
+
     gt_ignore_inds = np.concatenate(
         (np.zeros(gt_bboxes.shape[0], dtype=np.bool),
          np.ones(gt_bboxes_ignore.shape[0], dtype=np.bool)))
     # stack gt_bboxes and gt_bboxes_ignore for convenience
-    gt_bboxes = np.vstack((gt_bboxes, gt_bboxes_ignore))
+    # print(gt_bboxes.shape, gt_bboxes_ignore.shape)
+    if len(gt_bboxes.shape)==1:
+        gt_bboxes = gt_bboxes_ignore
+    else:
+        gt_bboxes = np.vstack((gt_bboxes, gt_bboxes_ignore))
 
     num_dets = det_bboxes.shape[0]
     num_gts = gt_bboxes.shape[0]
@@ -248,12 +259,13 @@ def get_cls_results(det_results, annotations, class_id):
     Returns:
         tuple[list[np.ndarray]]: detected bboxes, gt bboxes, ignored gt bboxes
     """
-    cls_dets = [img_res[class_id] for img_res in det_results]
+    cls_dets = [img_res[0][class_id] for img_res in det_results]
     cls_gts = []
     cls_gts_ignore = []
     for ann in annotations:
         gt_inds = ann['labels'] == class_id
-        cls_gts.append(ann['bboxes'][gt_inds, :])
+        # cls_gts.append(ann['bboxes'][gt_inds, :])
+        cls_gts.append(ann['bboxes'][gt_inds])
 
         if ann.get('labels_ignore', None) is not None:
             ignore_inds = ann['labels_ignore'] == class_id
@@ -311,7 +323,7 @@ def eval_map(det_results,
 
     num_imgs = len(det_results)
     num_scales = len(scale_ranges) if scale_ranges is not None else 1
-    num_classes = len(det_results[0])  # positive class num
+    num_classes = len(det_results[0][0])  # positive class num
     area_ranges = ([(rg[0]**2, rg[1]**2) for rg in scale_ranges]
                    if scale_ranges is not None else None)
 
