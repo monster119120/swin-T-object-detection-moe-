@@ -27,7 +27,7 @@ cd ..
 
 
 # for shift dataset
-git clone https://github.com/monster119120/shift-dev.git
+git clone https://ghproxy.com/https://github.com/monster119120/shift-dev.git
 cd shift-dev
 bash download.sh
 
