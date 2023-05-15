@@ -8,25 +8,34 @@
 conda create -n swin python==3.8
 conda activate swin
 
-
+# for pytorch
 pip install torch==1.10.0+cu111 torchvision==0.11.0+cu111 torchaudio==0.10.0 -f https://download.pytorch.org/whl/torch_stable.html
 pip install mmcv-full==1.3.16 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.10.0/index.html
 
 
+# for mmdet
 git clone https://ghproxy.com/https://github.com/monster119120/swin-T-object-detection-moe-.git
 cd swin-T-object-detection-moe-
 pip install -e .
 
-git clone https://ghproxy.com/https://github.com/SJTU1037/tutel.git
-cd tutel
+
+# for tutel
+git clone https://ghproxy.com/https://github.com/monster119120/tutel_pda.git
+cd tutel_pda
 pip install -e .
 cd ..
 
 
+# for shift dataset
+git clone https://github.com/monster119120/shift-dev.git
+cd shift-dev
+bash download.sh
+
+
+# others
 pip install pycocotools
 pip uninstall pycocotools
 pip install mmpycocotools
-
 pip install numpy==1.23.5
 
 ```
